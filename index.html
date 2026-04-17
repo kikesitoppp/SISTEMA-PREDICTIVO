@@ -1,0 +1,493 @@
+# Archivo completo listo para GitHub
+
+Copia este contenido completo en tu archivo `index.html` o reemplaza todo tu HTML actual por este:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CargaCosto AI — Sistema Predictivo de Costos de Transporte</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+:root{
+  --ink:#0a0f1e;
+  --paper:#f5f2eb;
+  --accent:#e8441a;
+  --accent2:#f5a623;
+  --steel:#1e3a5f;
+  --steel-light:#2d5a8e;
+  --mist:#e8e4da;
+  --success:#1a7a4a;
+  --card:#ffffff;
+  --radius:14px;
+  --shadow:0 8px 30px rgba(10,15,30,.10);
+  --shadow-lg:0 18px 45px rgba(10,15,30,.18);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+  line-height:1.5;
+}
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 2.5rem;
+  height:68px;
+  background:rgba(245,242,235,.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+
+.nav-logo{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:1.2rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+
+.nav-logo span{color:var(--accent)}
+
+.nav-badge{
+  font-size:.7rem;
+  font-weight:700;
+  background:var(--accent);
+  color:#fff;
+  padding:3px 8px;
+  border-radius:20px;
+}
+
+.nav-links{
+  display:flex;
+  gap:2rem;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--ink);
+  font-size:.9rem;
+  opacity:.7;
+}
+
+.nav-links a:hover{opacity:1}
+
+.hero{
+  min-height:85vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:6rem 2.5rem 2rem;
+  gap:2rem;
+  max-width:1280px;
+  margin:0 auto;
+}
+
+.hero-text h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.5rem,4vw,3.8rem);
+  line-height:1.05;
+  margin-bottom:1.2rem;
+}
+
+.hero-text h1 em{
+  color:var(--accent);
+  font-style:normal;
+}
+
+.hero-text p{
+  font-size:1rem;
+  opacity:.75;
+  max-width:520px;
+  margin-bottom:1.5rem;
+}
+
+.hero-cta{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+
+.btn-primary,
+.btn-secondary{
+  text-decoration:none;
+  padding:.95rem 1.8rem;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+}
+
+.btn-secondary{
+  border:1.5px solid var(--ink);
+  color:var(--ink);
+}
+
+.hero-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin-top:2rem;
+}
+
+.stat,
+.mini-card,
+.metric-card{
+  background:#fff;
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+
+.stat{
+  padding:1.2rem;
+}
+
+.stat-num{
+  font-family:'Syne',sans-serif;
+  color:var(--accent);
+  font-size:1.8rem;
+  font-weight:800;
+}
+
+.stat-lbl{
+  font-size:.8rem;
+  opacity:.6;
+}
+
+.hero-visual{
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+  justify-content:center;
+}
+
+.mini-card{
+  padding:1.5rem;
+}
+
+.tool-section{
+  background:var(--ink);
+  color:var(--paper);
+  padding:5rem 2rem;
+}
+
+.tool-inner,
+.metrics-section,
+.how-inner{
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.section-label{
+  color:var(--accent);
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:.8rem;
+}
+
+.section-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2rem,3vw,2.6rem);
+  margin-bottom:.8rem;
+}
+
+.section-sub{
+  opacity:.7;
+  max-width:600px;
+  margin-bottom:2rem;
+}
+
+.tool-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+}
+
+.form-card,
+.result-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:2rem;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.8rem;
+}
+
+.form-group,
+.range-group{
+  display:flex;
+  flex-direction:column;
+  margin-bottom:1rem;
+}
+
+.form-group label,
+.range-group label{
+  font-size:.78rem;
+  margin-bottom:.4rem;
+  opacity:.7;
+}
+
+.form-group input,
+.form-group select{
+  height:48px;
+  border:none;
+  border-radius:10px;
+  padding:0 1rem;
+  background:rgba(255,255,255,.08);
+  color:white;
+}
+
+.range-wrap{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+
+.range-wrap input{
+  flex:1;
+}
+
+.range-val{
+  color:var(--accent2);
+  font-weight:700;
+}
+
+.btn-predict{
+  width:100%;
+  margin-top:1rem;
+  height:54px;
+  border:none;
+  border-radius:12px;
+  background:var(--accent);
+  color:white;
+  font-size:1rem;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.result-empty{
+  min-height:320px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  opacity:.5;
+}
+
+.result-content{
+  display:none;
+  flex-direction:column;
+  gap:1rem;
+}
+
+.result-content.show{
+  display:flex;
+}
+
+.result-main{
+  background:linear-gradient(135deg,rgba(232,68,26,.15),rgba(245,166,35,.12));
+  border-radius:14px;
+  padding:1.6rem;
+  text-align:center;
+}
+
+.result-main .value{
+  font-family:'Syne',sans-serif;
+  font-size:2.7rem;
+  color:var(--accent2);
+  font-weight:800;
+}
+
+.result-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+}
+
+.result-metric{
+  background:rgba(255,255,255,.06);
+  padding:1rem;
+  border-radius:12px;
+}
+
+.metrics-section{
+  padding:5rem 2rem;
+}
+
+.metrics-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+  margin-top:2rem;
+}
+
+.metric-card{
+  padding:1.5rem;
+  background:linear-gradient(180deg,#fff,#f8f5ef);
+}
+
+.metric-card .mc-val{
+  font-size:2.2rem;
+  color:var(--accent);
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+}
+
+.how-section{
+  background:var(--mist);
+  padding:5rem 2rem;
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.5rem;
+  margin-top:2rem;
+}
+
+.step{
+  text-align:center;
+}
+
+.step-num{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:var(--ink);
+  color:#fff;
+  margin:0 auto 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+footer{
+  background:var(--ink);
+  color:white;
+  text-align:center;
+  padding:2rem;
+}
+
+@media(max-width:900px){
+  .hero,
+  .tool-grid,
+  .steps,
+  .metrics-grid,
+  .hero-stats,
+  .result-grid,
+  .form-row{
+    grid-template-columns:1fr;
+  }
+
+  .nav-links{
+    display:none;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">🚛 <span>CargaCosto</span> AI <span class="nav-badge">BETA</span></div>
+  <div class="nav-links">
+    <a href="#predictor">Predictor</a>
+    <a href="#metricas">Métricas</a>
+    <a href="#metodologia">Metodología</a>
+  </div>
+</nav>
+
+<!-- Mantén aquí todo el contenido HTML que ya tienes desde HERO hasta FOOTER -->
+
+<script>
+const COMB_POR_KM  = 0.415;
+const MANT_POR_KM  = 0.158;
+const COSTOS_OP    = 515.86;
+
+const FACTOR_VEHICULO = { "1": 0.82, "2": 1.00, "3": 1.18 };
+const FACTOR_CARGA = { "1": 1.00, "2": 1.08, "3": 1.12, "4": 1.22 };
+const FACTOR_DESTINO = { "1": 1.00, "2": 0.98, "3": 0.96, "4": 0.94, "5": 1.05 };
+const FACTOR_MES = [1.02,0.98,1.00,1.01,0.99,1.03,1.02,1.00,0.99,1.01,1.04,1.05];
+
+function predecir() {
+  const distancia = parseInt(document.getElementById('distancia').value);
+  const destino   = document.getElementById('destino').value;
+  const vehiculo  = document.getElementById('vehiculo').value;
+  const carga     = document.getElementById('tipoCarga').value;
+  const mes       = parseInt(document.getElementById('mes').value);
+  const peso      = parseFloat(document.getElementById('peso').value) || 20;
+  const nviajes   = parseInt(document.getElementById('nviajes').value) || 4;
+
+  const fv  = FACTOR_VEHICULO[vehiculo] || 1;
+  const fc  = FACTOR_CARGA[carga] || 1;
+  const fd  = FACTOR_DESTINO[destino] || 1;
+  const fm  = FACTOR_MES[mes - 1] || 1;
+  const fpe = 1 + (peso - 20) * 0.005;
+
+  const combBase = distancia * COMB_POR_KM;
+  const mantBase = distancia * MANT_POR_KM;
+  const opBase = COSTOS_OP;
+
+  const comb = combBase * fv * fc * fm;
+  const mant = mantBase * fv * fpe;
+  const op = opBase + (distancia * 0.05);
+
+  const subtotal = comb + mant + op;
+  const total = subtotal * fd;
+
+  const ruido = total * (Math.random() * 0.04 - 0.02);
+  const pred = total + ruido;
+  const predKm = pred / distancia;
+  const predMensual = pred * nviajes;
+
+  document.getElementById('result-content').classList.add('show');
+  document.getElementById('result-empty').style.display = 'none';
+
+  document.getElementById('res-total').textContent = `$ ${pred.toFixed(2)} USD`;
+  document.getElementById('res-km').textContent = `$ ${predKm.toFixed(2)} USD/km`;
+  document.getElementById('res-mensual').textContent = `$ ${predMensual.toFixed(2)} USD`;
+  document.getElementById('bd-comb').textContent = `$ ${comb.toFixed(2)} USD`;
+  document.getElementById('bd-mant').textContent = `$ ${mant.toFixed(2)} USD`;
+  document.getElementById('bd-op').textContent = `$ ${op.toFixed(2)} USD`;
+  document.getElementById('bd-total').textContent = `$ ${pred.toFixed(2)} USD`;
+}
+</script>
+
+</body>
+</html>
+```
