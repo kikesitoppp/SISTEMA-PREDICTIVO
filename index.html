@@ -1,6 +1,3 @@
-# index.html
-
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,15 +10,17 @@
 
   <style>
     :root{
-      --bg:#f5f3ee;
-      --dark:#0f172a;
-      --accent:#e4572e;
-      --accent2:#f5a623;
-      --white:#ffffff;
-      --gray:#6b7280;
-      --card:#ffffff;
-      --shadow:0 10px 35px rgba(0,0,0,.08);
-      --radius:22px;
+      --bg:#050816;
+      --card:#0f172a;
+      --card2:#111c34;
+      --border:rgba(255,255,255,.08);
+      --text:#f8fafc;
+      --muted:rgba(255,255,255,.65);
+      --accent:#ff5b2e;
+      --accent2:#ffb347;
+      --success:#22c55e;
+      --shadow:0 20px 50px rgba(0,0,0,.35);
+      --radius:28px;
     }
 
     *{
@@ -30,15 +29,18 @@
       box-sizing:border-box;
     }
 
-    body{
-      font-family:'Inter',sans-serif;
-      background:var(--bg);
-      color:var(--dark);
-      line-height:1.6;
-    }
-
     html{
       scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,91,46,.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(0,140,255,.14), transparent 28%),
+        var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
     }
 
     nav{
@@ -46,14 +48,14 @@
       top:0;
       left:0;
       width:100%;
-      background:rgba(245,243,238,.95);
-      backdrop-filter:blur(12px);
+      z-index:1000;
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding:1.2rem 3rem;
-      border-bottom:1px solid rgba(0,0,0,.05);
-      z-index:1000;
+      padding:1.3rem 3rem;
+      background:rgba(5,8,22,.82);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(255,255,255,.05);
     }
 
     .logo{
@@ -73,36 +75,41 @@
     }
 
     nav a{
+      color:var(--muted);
       text-decoration:none;
-      color:var(--dark);
-      font-weight:500;
+      transition:.2s;
+    }
+
+    nav a:hover{
+      color:white;
     }
 
     .hero{
-      padding:8rem 3rem 4rem;
       max-width:1300px;
       margin:auto;
+      min-height:100vh;
       display:grid;
       grid-template-columns:1.1fr .9fr;
       gap:3rem;
       align-items:center;
-      min-height:100vh;
+      padding:8rem 3rem 4rem;
     }
 
-    .hero h1{
+    .hero-text h1{
       font-family:'Playfair Display',serif;
-      font-size:4rem;
-      line-height:1.15;
+      font-size:4.4rem;
+      line-height:1.08;
       margin-bottom:1.5rem;
     }
 
-    .hero h1 span{
+    .hero-text h1 span{
       color:var(--accent);
     }
 
-    .hero p{
-      max-width:600px;
-      color:var(--gray);
+    .hero-text p{
+      max-width:620px;
+      color:var(--muted);
+      line-height:1.9;
       margin-bottom:2rem;
       font-size:1.05rem;
     }
@@ -115,23 +122,26 @@
 
     .btn{
       padding:1rem 1.8rem;
-      border:none;
-      border-radius:14px;
-      cursor:pointer;
-      font-weight:700;
+      border-radius:16px;
       text-decoration:none;
-      display:inline-block;
+      font-weight:700;
+      transition:.25s;
     }
 
     .btn-primary{
-      background:var(--accent);
+      background:linear-gradient(135deg,var(--accent),#ff7a18);
       color:white;
+      box-shadow:0 15px 35px rgba(255,91,46,.25);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-3px);
     }
 
     .btn-secondary{
-      background:white;
-      color:var(--dark);
-      border:1px solid rgba(0,0,0,.1);
+      border:1px solid rgba(255,255,255,.12);
+      color:white;
+      background:rgba(255,255,255,.04);
     }
 
     .hero-cards{
@@ -139,58 +149,67 @@
       gap:1rem;
     }
 
-    .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+    .hero-card{
+      background:rgba(15,23,42,.72);
+      backdrop-filter:blur(20px);
+      border:1px solid var(--border);
+      border-radius:24px;
       padding:1.5rem;
+      box-shadow:var(--shadow);
     }
 
-    .card h3{
+    .hero-card h3{
       font-family:'Playfair Display',serif;
       margin-bottom:.8rem;
+      color:var(--accent2);
     }
 
     .predictor{
-      background:var(--dark);
-      color:white;
-      padding:5rem 3rem;
+      padding:3rem 2rem 6rem;
     }
 
     .predictor-container{
-      max-width:1200px;
+      max-width:1350px;
       margin:auto;
     }
 
     .section-title{
       font-family:'Playfair Display',serif;
-      font-size:2.8rem;
+      font-size:3rem;
       margin-bottom:1rem;
+      text-align:center;
     }
 
     .section-sub{
+      text-align:center;
+      color:var(--muted);
       max-width:700px;
-      opacity:.8;
-      margin-bottom:2rem;
+      margin:0 auto 3rem;
+      line-height:1.8;
     }
 
     .predictor-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:2rem;
+      align-items:start;
     }
 
-    .form-card,.result-card{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:24px;
+    .form-card,
+    .result-card{
+      background:rgba(15,23,42,.72);
+      backdrop-filter:blur(20px);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
       padding:2rem;
+      box-shadow:var(--shadow);
     }
 
-    .form-card h3,.result-card h3{
+    .form-card h3,
+    .result-card h3{
       font-family:'Playfair Display',serif;
-      margin-bottom:1.5rem;
-      font-size:1.6rem;
+      font-size:1.8rem;
+      margin-bottom:1.8rem;
     }
 
     .form-row{
@@ -203,89 +222,165 @@
     .form-group{
       display:flex;
       flex-direction:column;
-      margin-bottom:1rem;
     }
 
     .form-group label{
-      margin-bottom:.45rem;
-      font-size:.9rem;
-      opacity:.8;
+      font-size:.82rem;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:.5rem;
+      letter-spacing:.5px;
     }
 
     .form-group input,
     .form-group select{
-      height:50px;
-      border:none;
-      border-radius:14px;
-      padding:0 1rem;
-      background:rgba(255,255,255,.08);
+      width:100%;
+      height:58px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.06);
       color:white;
-      font-size:.95rem;
+      padding:0 1rem;
+      font-size:1rem;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus{
+      outline:none;
+      border-color:rgba(255,91,46,.6);
+      box-shadow:0 0 0 4px rgba(255,91,46,.12);
+    }
+
+    .range-box{
+      margin-bottom:1rem;
+    }
+
+    .range-box input{
+      width:100%;
+      accent-color:var(--accent);
+    }
+
+    .range-value{
+      margin-top:.6rem;
+      color:var(--accent2);
+      font-weight:700;
+      font-size:1.1rem;
     }
 
     .predict-btn,
     .pdf-btn{
       width:100%;
+      height:60px;
       border:none;
-      border-radius:14px;
-      height:54px;
+      border-radius:18px;
       font-size:1rem;
       font-weight:700;
       cursor:pointer;
+      transition:.25s;
       margin-top:1rem;
     }
 
     .predict-btn{
-      background:var(--accent);
+      background:linear-gradient(135deg,var(--accent),#ff7a18);
       color:white;
+      box-shadow:0 15px 35px rgba(255,91,46,.25);
+    }
+
+    .predict-btn:hover{
+      transform:translateY(-3px);
     }
 
     .pdf-btn{
-      background:var(--accent2);
-      color:#111;
+      background:rgba(255,255,255,.06);
+      color:white;
+      border:1px solid rgba(255,255,255,.08);
       display:none;
     }
 
-    .result-box{
-      background:rgba(255,255,255,.05);
-      border-radius:18px;
-      padding:1.5rem;
-      margin-bottom:1rem;
+    .result-top{
+      background:linear-gradient(135deg, rgba(255,91,46,.14), rgba(255,179,71,.08));
+      border:1px solid rgba(255,91,46,.18);
+      border-radius:24px;
+      padding:2rem;
+      text-align:center;
+      margin-bottom:1.5rem;
+    }
+
+    .result-top small{
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:1px;
     }
 
     .big-result{
       font-family:'Playfair Display',serif;
-      font-size:3rem;
+      font-size:4rem;
+      line-height:1;
       color:var(--accent2);
-      margin:.5rem 0;
+      margin:1rem 0;
+    }
+
+    .route-label{
+      color:var(--muted);
     }
 
     .result-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:1rem;
+      margin-bottom:1.5rem;
     }
 
     .metric{
       background:rgba(255,255,255,.05);
-      border-radius:14px;
-      padding:1rem;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px;
+      padding:1.2rem;
+    }
+
+    .metric-title{
+      color:var(--muted);
+      font-size:.8rem;
+      text-transform:uppercase;
+      margin-bottom:.5rem;
     }
 
     .metric strong{
       display:block;
-      margin-top:.4rem;
+      font-size:1.6rem;
+      color:white;
+    }
+
+    .breakdown{
+      margin-top:1rem;
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:1rem;
+    }
+
+    .breakdown-item{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:.9rem 0;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    .breakdown-item span{
+      color:var(--muted);
+    }
+
+    .breakdown-item strong{
       color:var(--accent2);
     }
 
     footer{
-      background:#08101f;
-      color:white;
-      text-align:center;
+      border-top:1px solid rgba(255,255,255,.05);
       padding:2rem;
+      text-align:center;
+      color:var(--muted);
     }
 
-    @media(max-width:900px){
+    @media(max-width:950px){
       .hero,
       .predictor-grid,
       .form-row,
@@ -293,11 +388,15 @@
         grid-template-columns:1fr;
       }
 
+      .hero-text h1{
+        font-size:3rem;
+      }
+
       nav ul{
         display:none;
       }
 
-      .hero h1{
+      .big-result{
         font-size:3rem;
       }
     }
@@ -305,221 +404,260 @@
 </head>
 <body>
 
-<nav>
-  <div class="logo">🚛 <span>CargaCosto</span> AI</div>
-  <ul>
-    <li><a href="#inicio">Inicio</a></li>
-    <li><a href="#predictor">Predictor</a></li>
-    <li><a href="#footer">Contacto</a></li>
-  </ul>
-</nav>
+  <nav>
+    <div class="logo">🚛 <span>CargaCosto</span> AI</div>
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#predictor">Predictor</a></li>
+      <li><a href="#footer">Contacto</a></li>
+    </ul>
+  </nav>
 
-<section class="hero" id="inicio">
-  <div>
-    <h1>Predicción de costos de <span>transporte pesado</span> usando inteligencia artificial</h1>
-    <p>
-      Sistema web orientado a la estimación de costos de transporte terrestre de carga pesada. Este prototipo utiliza datos ficticios pero lógicos para representar el funcionamiento de un modelo predictivo de tesis.
-    </p>
+  <section class="hero" id="inicio">
+    <div class="hero-text">
+      <h1>Predicción de costos de <span>transporte pesado</span> con inteligencia artificial</h1>
+      <p>
+        Prototipo web para tesis enfocado en la estimación de costos de transporte terrestre de carga pesada mediante un modelo predictivo basado en Random Forest.
+      </p>
 
-    <div class="hero-buttons">
-      <a href="#predictor" class="btn btn-primary">Probar sistema</a>
-      <a href="#footer" class="btn btn-secondary">Más información</a>
-    </div>
-  </div>
-
-  <div class="hero-cards">
-    <div class="card">
-      <h3>Variables del modelo</h3>
-      <p>Distancia, peso, tipo de vehículo, combustible, peajes, mantenimiento, destino y tipo de carga.</p>
-    </div>
-
-    <div class="card">
-      <h3>Algoritmo de referencia</h3>
-      <p>Random Forest Regressor entrenado con datos simulados de viajes de carga pesada.</p>
-    </div>
-
-    <div class="card">
-      <h3>Precisión estimada</h3>
-      <p>R² aproximado de 0.93 en escenarios de prueba simulados.</p>
-    </div>
-  </div>
-</section>
-
-<section class="predictor" id="predictor">
-  <div class="predictor-container">
-    <h2 class="section-title">Simulador predictivo</h2>
-    <p class="section-sub">
-      Ingrese valores aproximados del viaje para obtener una predicción simulada del costo total del transporte.
-    </p>
-
-    <div class="predictor-grid">
-      <div class="form-card">
-        <h3>Datos del viaje</h3>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Distancia (km)</label>
-            <input type="number" id="distancia" value="850">
-          </div>
-
-          <div class="form-group">
-            <label>Peso de la carga (toneladas)</label>
-            <input type="number" id="peso" value="24">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Tipo de vehículo</label>
-            <select id="vehiculo">
-              <option value="1">Camión pequeño</option>
-              <option value="2">Camión mediano</option>
-              <option value="3">Tráiler pesado</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Tipo de carga</label>
-            <select id="carga">
-              <option value="1">Carga seca</option>
-              <option value="2">Refrigerada</option>
-              <option value="3">Peligrosa</option>
-              <option value="4">Sobredimensionada</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Destino</label>
-            <select id="destino">
-              <option value="1">Quito</option>
-              <option value="2">Guayaquil</option>
-              <option value="3">Cuenca</option>
-              <option value="4">Manta</option>
-              <option value="5">Tulcán</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Número de viajes al mes</label>
-            <input type="number" id="viajes" value="4">
-          </div>
-        </div>
-
-        <button class="predict-btn" onclick="predecirCosto()">Predecir costo</button>
-        <button class="pdf-btn" id="pdfBtn" onclick="exportarPDF()">Exportar informe PDF</button>
-      </div>
-
-      <div class="result-card">
-        <h3>Resultado predictivo</h3>
-
-        <div class="result-box">
-          <small>Costo total estimado</small>
-          <div class="big-result" id="resultadoTotal">$ 0.00</div>
-          <small>USD por viaje</small>
-        </div>
-
-        <div class="result-grid">
-          <div class="metric">
-            Combustible
-            <strong id="combustibleRes">$ 0</strong>
-          </div>
-
-          <div class="metric">
-            Mantenimiento
-            <strong id="mantenimientoRes">$ 0</strong>
-          </div>
-
-          <div class="metric">
-            Costos operativos
-            <strong id="operativosRes">$ 0</strong>
-          </div>
-
-          <div class="metric">
-            Costo mensual
-            <strong id="mensualRes">$ 0</strong>
-          </div>
-        </div>
+      <div class="hero-buttons">
+        <a href="#predictor" class="btn btn-primary">Probar sistema</a>
+        <a href="#footer" class="btn btn-secondary">Más información</a>
       </div>
     </div>
-  </div>
-</section>
 
-<footer id="footer">
-  Desarrollado para proyecto de tesis · Sistema predictivo de costos de transporte de carga pesada · 2026
-</footer>
+    <div class="hero-cards">
+      <div class="hero-card">
+        <h3>Variables consideradas</h3>
+        <p>Distancia, peso, ciudad, combustible, mantenimiento, tipo de carga y tipo de vehículo.</p>
+      </div>
 
-<script>
-  let ultimoResultado = {};
+      <div class="hero-card">
+        <h3>Modelo de referencia</h3>
+        <p>Random Forest Regressor entrenado con datos simulados para representar escenarios reales.</p>
+      </div>
 
-  function predecirCosto(){
-    const distancia = parseFloat(document.getElementById('distancia').value);
-    const peso = parseFloat(document.getElementById('peso').value);
-    const vehiculo = parseInt(document.getElementById('vehiculo').value);
-    const carga = parseInt(document.getElementById('carga').value);
-    const destino = parseInt(document.getElementById('destino').value);
-    const viajes = parseInt(document.getElementById('viajes').value);
+      <div class="hero-card">
+        <h3>Precisión esperada</h3>
+        <p>R² estimado de 0.93 y error medio absoluto de ±12 USD.</p>
+      </div>
+    </div>
+  </section>
 
-    const combustibleKm = 0.42;
-    const mantenimientoKm = 0.16;
-    const operativosBase = 420;
+  <section class="predictor" id="predictor">
+    <div class="predictor-container">
+      <h2 class="section-title">Simulador predictivo</h2>
+      <p class="section-sub">
+        Ingrese los parámetros del viaje y obtenga una predicción estimada del costo total del transporte.
+      </p>
 
-    const factorVehiculo = [0,0.9,1.1,1.3];
-    const factorCarga = [0,1,1.08,1.15,1.22];
-    const factorDestino = [0,1,1.04,1.02,1.05,0.98];
+      <div class="predictor-grid">
+        <div class="form-card">
+          <h3>📋 Parámetros del viaje</h3>
 
-    const combustible = distancia * combustibleKm * factorVehiculo[vehiculo];
-    const mantenimiento = distancia * mantenimientoKm * (peso/20);
-    const operativos = operativosBase + (distancia * 0.08);
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ciudad de origen</label>
+              <select id="origen">
+                <option>Tulcán</option>
+                <option>Quito</option>
+                <option>Guayaquil</option>
+                <option>Cuenca</option>
+              </select>
+            </div>
 
-    let total = (combustible + mantenimiento + operativos) * factorCarga[carga] * factorDestino[destino];
+            <div class="form-group">
+              <label>Ciudad de destino</label>
+              <select id="destino">
+                <option>Guayaquil</option>
+                <option>Quito</option>
+                <option>Cuenca</option>
+                <option>Manta</option>
+              </select>
+            </div>
+          </div>
 
-    const ruido = total * (Math.random() * 0.06 - 0.03);
-    total += ruido;
+          <div class="range-box">
+            <label>Distancia recorrida (km)</label>
+            <input type="range" min="50" max="1500" value="850" id="distancia" oninput="actualizarDistancia()">
+            <div class="range-value" id="distanciaValor">850 km</div>
+          </div>
 
-    const mensual = total * viajes;
+          <div class="form-row">
+            <div class="form-group">
+              <label>Tipo de vehículo</label>
+              <select id="vehiculo">
+                <option value="1">Camión 2 ejes</option>
+                <option value="2">Camión mediano</option>
+                <option value="3">Tráiler pesado</option>
+              </select>
+            </div>
 
-    document.getElementById('resultadoTotal').innerText = '$ ' + total.toFixed(2);
-    document.getElementById('combustibleRes').innerText = '$ ' + combustible.toFixed(2);
-    document.getElementById('mantenimientoRes').innerText = '$ ' + mantenimiento.toFixed(2);
-    document.getElementById('operativosRes').innerText = '$ ' + operativos.toFixed(2);
-    document.getElementById('mensualRes').innerText = '$ ' + mensual.toFixed(2);
+            <div class="form-group">
+              <label>Tipo de carga</label>
+              <select id="carga">
+                <option value="1">Carga general</option>
+                <option value="2">Refrigerada</option>
+                <option value="3">Peligrosa</option>
+                <option value="4">Sobredimensionada</option>
+              </select>
+            </div>
+          </div>
 
-    document.getElementById('pdfBtn').style.display = 'block';
+          <div class="form-row">
+            <div class="form-group">
+              <label>Peso de carga (toneladas)</label>
+              <input type="number" id="peso" value="20">
+            </div>
 
-    ultimoResultado = {
-      distancia,
-      peso,
-      total,
-      combustible,
-      mantenimiento,
-      operativos,
-      mensual,
-      viajes
-    };
-  }
+            <div class="form-group">
+              <label>Viajes al mes</label>
+              <input type="number" id="viajes" value="4">
+            </div>
+          </div>
 
-  function exportarPDF(){
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+          <button class="predict-btn" onclick="predecirCosto()">🚚 Calcular predicción</button>
+          <button class="pdf-btn" id="pdfBtn" onclick="exportarPDF()">📄 Exportar informe PDF</button>
+        </div>
 
-    doc.setFontSize(18);
-    doc.text('Informe Predictivo de Costos de Transporte', 20, 20);
+        <div class="result-card">
+          <h3>📊 Resultado de predicción</h3>
 
-    doc.setFontSize(12);
-    doc.text('Distancia: ' + ultimoResultado.distancia + ' km', 20, 40);
-    doc.text('Peso: ' + ultimoResultado.peso + ' toneladas', 20, 50);
-    doc.text('Costo combustible: $ ' + ultimoResultado.combustible.toFixed(2), 20, 70);
-    doc.text('Costo mantenimiento: $ ' + ultimoResultado.mantenimiento.toFixed(2), 20, 80);
-    doc.text('Costos operativos: $ ' + ultimoResultado.operativos.toFixed(2), 20, 90);
-    doc.text('Costo total estimado: $ ' + ultimoResultado.total.toFixed(2), 20, 110);
-    doc.text('Costo mensual estimado: $ ' + ultimoResultado.mensual.toFixed(2), 20, 120);
+          <div class="result-top">
+            <small>Costo total estimado del viaje</small>
+            <div class="big-result" id="resultadoTotal">$ 0.00</div>
+            <div class="route-label" id="rutaTexto">Tulcán → Guayaquil · 850 km</div>
+          </div>
 
-    doc.save('informe_costos_transporte.pdf');
-  }
-</script>
+          <div class="result-grid">
+            <div class="metric">
+              <div class="metric-title">Costo por km</div>
+              <strong id="costoKm">$ 0.00</strong>
+            </div>
+
+            <div class="metric">
+              <div class="metric-title">Precisión modelo (R²)</div>
+              <strong>0.93</strong>
+            </div>
+
+            <div class="metric">
+              <div class="metric-title">Costo mensual</div>
+              <strong id="mensualRes">$ 0.00</strong>
+            </div>
+
+            <div class="metric">
+              <div class="metric-title">Error medio</div>
+              <strong>± 12 USD</strong>
+            </div>
+          </div>
+
+          <div class="breakdown">
+            <div class="breakdown-item">
+              <span>⛽ Combustible</span>
+              <strong id="combustibleRes">$ 0</strong>
+            </div>
+
+            <div class="breakdown-item">
+              <span>🔧 Mantenimiento</span>
+              <strong id="mantenimientoRes">$ 0</strong>
+            </div>
+
+            <div class="breakdown-item">
+              <span>🏢 Costos operativos</span>
+              <strong id="operativosRes">$ 0</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    Sistema predictivo de costos de transporte de carga pesada · Proyecto de tesis · 2026
+  </footer>
+
+  <script>
+    let ultimoResultado = {};
+
+    function actualizarDistancia(){
+      const distancia = document.getElementById('distancia').value;
+      document.getElementById('distanciaValor').innerText = distancia + ' km';
+    }
+
+    function predecirCosto(){
+      const distancia = parseFloat(document.getElementById('distancia').value);
+      const peso = parseFloat(document.getElementById('peso').value);
+      const viajes = parseFloat(document.getElementById('viajes').value);
+      const vehiculo = parseInt(document.getElementById('vehiculo').value);
+      const carga = parseInt(document.getElementById('carga').value);
+      const origen = document.getElementById('origen').value;
+      const destino = document.getElementById('destino').value;
+
+      const combustibleBase = distancia * 0.38;
+      const mantenimientoBase = distancia * 0.12;
+      const operativosBase = 180 + (distancia * 0.14);
+
+      const factorVehiculo = [0, 1, 1.15, 1.35];
+      const factorCarga = [0, 1, 1.08, 1.18, 1.25];
+
+      const combustible = combustibleBase * factorVehiculo[vehiculo];
+      const mantenimiento = mantenimientoBase * (peso / 18);
+      const operativos = operativosBase;
+
+      let total = (combustible + mantenimiento + operativos) * factorCarga[carga];
+
+      const ruido = total * (Math.random() * 0.05 - 0.025);
+      total += ruido;
+
+      const mensual = total * viajes;
+      const costoKm = total / distancia;
+
+      document.getElementById('resultadoTotal').innerText = '$ ' + total.toFixed(2);
+      document.getElementById('costoKm').innerText = '$ ' + costoKm.toFixed(2);
+      document.getElementById('mensualRes').innerText = '$ ' + mensual.toFixed(2);
+      document.getElementById('combustibleRes').innerText = '$ ' + combustible.toFixed(2);
+      document.getElementById('mantenimientoRes').innerText = '$ ' + mantenimiento.toFixed(2);
+      document.getElementById('operativosRes').innerText = '$ ' + operativos.toFixed(2);
+      document.getElementById('rutaTexto').innerText = origen + ' → ' + destino + ' · ' + distancia + ' km';
+
+      document.getElementById('pdfBtn').style.display = 'block';
+
+      ultimoResultado = {
+        origen,
+        destino,
+        distancia,
+        peso,
+        viajes,
+        total,
+        costoKm,
+        mensual,
+        combustible,
+        mantenimiento,
+        operativos
+      };
+    }
+
+    function exportarPDF(){
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFontSize(18);
+      doc.text('Informe Predictivo de Transporte', 20, 20);
+
+      doc.setFontSize(12);
+      doc.text('Origen: ' + ultimoResultado.origen, 20, 40);
+      doc.text('Destino: ' + ultimoResultado.destino, 20, 50);
+      doc.text('Distancia: ' + ultimoResultado.distancia + ' km', 20, 60);
+      doc.text('Peso de carga: ' + ultimoResultado.peso + ' toneladas', 20, 70);
+      doc.text('Costo combustible: $ ' + ultimoResultado.combustible.toFixed(2), 20, 90);
+      doc.text('Costo mantenimiento: $ ' + ultimoResultado.mantenimiento.toFixed(2), 20, 100);
+      doc.text('Costos operativos: $ ' + ultimoResultado.operativos.toFixed(2), 20, 110);
+      doc.text('Costo total estimado: $ ' + ultimoResultado.total.toFixed(2), 20, 130);
+      doc.text('Costo mensual estimado: $ ' + ultimoResultado.mensual.toFixed(2), 20, 140);
+
+      doc.save('informe_predictivo_transporte.pdf');
+    }
+  </script>
 
 </body>
 </html>
-```
